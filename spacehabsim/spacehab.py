@@ -96,8 +96,11 @@ def create_world():
     #)
 
     # Add locations
-    table = world.add_location(
-       category="table", parent="module_2", pose=Pose(x=2, y=0, yaw=0.0)
+    rack1 = world.add_location(
+       category="rack", parent="module_2", pose=Pose(x=2.75, y=0, yaw=0.0)
+    )
+    rack2 = world.add_location(
+       category="rack", parent="module_2", pose=Pose(x=2, y=0.74, yaw=1.57)
     )
     #desk = world.add_location(
     #    category="desk", parent="bedroom", pose=Pose(x=3.15, y=3.65, yaw=0.0)
@@ -110,7 +113,10 @@ def create_world():
 
     ## Add objects
     world.add_object(
-        category="coke", parent=table, pose=Pose(x=2.0, y=-0.0, yaw=np.pi / 4.0)
+        category="wrench", parent=rack1, pose=Pose(x=2.75, y=0.05, yaw=np.pi / 4.0)
+    )
+    world.add_object(
+        category="tape", parent=rack2, pose=Pose(x=2, y=0.74, yaw=np.pi / 4.0)
     )
     #world.add_object(category="apple", parent=desk, pose=Pose(x=3.2, y=3.5, yaw=0.0))
     #world.add_object(category="apple", parent=table)
