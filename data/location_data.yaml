@@ -2,14 +2,14 @@
 # Example location metadata #
 #############################
 
-table:
+rack:
   footprint:
     type: box
-    dims: [0.9, 1.2]
+    dims: [0.5, 0.9]
     height: 0.5
   nav_poses:
-    - [-0.75, 0, 0]
-    - [0.75, 0, 3.14]
+    - [-0.4, 0, 0]
+    - [0.4, 0, 3.14]
   locations:
     - name: "tabletop"
       footprint:
