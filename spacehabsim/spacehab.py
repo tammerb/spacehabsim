@@ -24,7 +24,7 @@ def create_world():
     """Create a test world"""
     world = World()
 
-    # Set the location and object metadata
+    # Set the location and object metadata (TODO: Make new folders and files)
     world.set_metadata(
         locations=os.path.join(data_folder, "example_location_data.yaml"),
         objects=os.path.join(data_folder, "example_object_data.yaml"),
@@ -71,9 +71,9 @@ def create_world():
     #)
 
     # Add locations
-    #table = world.add_location(
-    #    category="table", parent="kitchen", pose=Pose(x=0.85, y=-0.5, yaw=-np.pi / 2.0)
-    #)
+    table = world.add_location(
+       category="table", parent="module_2", pose=Pose(x=2, y=0, yaw=0.0)
+    )
     #desk = world.add_location(
     #    category="desk", parent="bedroom", pose=Pose(x=3.15, y=3.65, yaw=0.0)
     #)
@@ -84,9 +84,9 @@ def create_world():
     #)
 
     ## Add objects
-    #world.add_object(
-    #    category="banana", parent=table, pose=Pose(x=1.0, y=-0.5, yaw=np.pi / 4.0)
-    #)
+    world.add_object(
+        category="coke", parent=table, pose=Pose(x=2.0, y=-0.0, yaw=np.pi / 4.0)
+    )
     #world.add_object(category="apple", parent=desk, pose=Pose(x=3.2, y=3.5, yaw=0.0))
     #world.add_object(category="apple", parent=table)
     #world.add_object(category="apple", parent=table)
