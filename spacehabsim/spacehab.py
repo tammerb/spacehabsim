@@ -10,7 +10,8 @@ import threading
 import numpy as np
 
 from pyrobosim.core import Robot, World, WorldYamlLoader
-from pyrobosim.gui import start_gui
+# from pyrobosim.gui import start_gui
+from ..gui import space_gui
 from pyrobosim.navigation import ConstantVelocityExecutor, PathPlanner
 # from pyrobosim.utils.general import get_data_folder
 from pyrobosim.utils.pose import Pose
@@ -64,7 +65,7 @@ def create_world():
                 (-1.5, -1.0),
                 (-2.5, -1.0),
                 (-3.0, -0.5)]
-    world.add_room(name="module_1", footprint=r1coords, color=[1, 0, 0])
+    world.add_room(name="module_5", footprint=r1coords, color=[1, 0, 0])
     r2coords = [(3.0, 0.5),
                 (2.5, 1.0),
                 (1.5, 1.0),
@@ -97,7 +98,7 @@ def create_world():
 
     # Add locations
     rack1 = world.add_location(
-       category="rack", parent="module_2", pose=Pose(x=2.75, y=0, yaw=0.0)
+       category="rack", parent="module_1", pose=Pose(x=-2.75, y=0, yaw=0.0)
     )
     rack2 = world.add_location(
        category="rack", parent="module_2", pose=Pose(x=2, y=0.74, yaw=1.57)
@@ -113,7 +114,7 @@ def create_world():
 
     ## Add objects
     world.add_object(
-        category="wrench", parent=rack1, pose=Pose(x=2.75, y=0.05, yaw=np.pi / 4.0)
+        category="wrench", parent=rack1, pose=Pose(x=-2.75, y=0.05, yaw=np.pi / 4.0)
     )
     world.add_object(
         category="tape", parent=rack2, pose=Pose(x=2, y=0.74, yaw=np.pi / 4.0)
@@ -156,6 +157,7 @@ def create_world_from_yaml(world_file):
 def main():
     """Initializes ROS node"""
     rclpy.init()
+
     node = WorldROSWrapper(state_pub_rate=0.1, dynamics_rate=0.01)
     node.declare_parameter("world_file", value="")
 
@@ -176,7 +178,7 @@ def main():
     ros_thread.start()
 
     # Start GUI in main thread
-    start_gui(node.world)
+    #space_gui.start_my_gui(node.world)
 
     return
 
