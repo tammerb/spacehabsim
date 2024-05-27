@@ -10,8 +10,8 @@ import threading
 import numpy as np
 
 from pyrobosim.core import Robot, World, WorldYamlLoader
-# from pyrobosim.gui import start_gui
-from ..gui import space_gui
+from pyrobosim.gui import start_gui
+#from ..gui import space_gui
 from pyrobosim.navigation import ConstantVelocityExecutor, PathPlanner
 # from pyrobosim.utils.general import get_data_folder
 from pyrobosim.utils.pose import Pose
@@ -79,7 +79,7 @@ def create_world():
     #world.add_room(name="bathroom", footprint=r3coords, color=[0, 0, 0.6])
 
     # Add hallways between the rooms
-    world.add_hallway(room_start="module_1", room_end="module_2", width=0.7)
+    world.add_hallway(room_start="module_5", room_end="module_2", width=0.7)
     #world.add_hallway(
     #    room_start="bathroom",
     #    room_end="bedroom",
@@ -98,7 +98,7 @@ def create_world():
 
     # Add locations
     rack1 = world.add_location(
-       category="rack", parent="module_1", pose=Pose(x=-2.75, y=0, yaw=0.0)
+       category="rack", parent="module_5", pose=Pose(x=-2.75, y=0, yaw=0.0)
     )
     rack2 = world.add_location(
        category="rack", parent="module_2", pose=Pose(x=2, y=0.74, yaw=1.57)
@@ -145,7 +145,7 @@ def create_world():
         path_executor=ConstantVelocityExecutor(),
         path_planner=path_planner,
     )
-    world.add_robot(robot, loc="module_1")
+    world.add_robot(robot, loc="module_5")
 
     return world
 
@@ -178,7 +178,7 @@ def main():
     ros_thread.start()
 
     # Start GUI in main thread
-    #space_gui.start_my_gui(node.world)
+    start_gui(node.world)
 
     return
 
