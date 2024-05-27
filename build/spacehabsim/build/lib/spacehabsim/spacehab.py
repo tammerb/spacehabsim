@@ -11,7 +11,7 @@ import numpy as np
 
 from pyrobosim.core import Robot, World, WorldYamlLoader
 #from pyrobosim.gui import start_gui
-from spacehabsim.gui.space_gui import start_my_gui
+from gui.space_gui import start_my_gui
 from pyrobosim.navigation import ConstantVelocityExecutor, PathPlanner
 # from pyrobosim.utils.general import get_data_folder
 from pyrobosim.utils.pose import Pose

@@ -27,7 +27,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'spacedemo = spacehabsim.spacehab:main',
+            'spacehab = spacehabsim.spacehab:main',
         ],
     },
 )

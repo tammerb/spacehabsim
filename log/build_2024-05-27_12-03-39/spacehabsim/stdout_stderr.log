@@ -1,0 +1,23 @@
+running egg_info
+writing build/spacehabsim/spacehabsim.egg-info/PKG-INFO
+writing dependency_links to build/spacehabsim/spacehabsim.egg-info/dependency_links.txt
+writing entry points to build/spacehabsim/spacehabsim.egg-info/entry_points.txt
+writing requirements to build/spacehabsim/spacehabsim.egg-info/requires.txt
+writing top-level names to build/spacehabsim/spacehabsim.egg-info/top_level.txt
+reading manifest file 'build/spacehabsim/spacehabsim.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file 'build/spacehabsim/spacehabsim.egg-info/SOURCES.txt'
+running build
+running build_py
+copying spacehabsim/spacehab.py -> /home/tammer/pyrobosim_ws/src/spacehabsim/build/spacehabsim/build/lib/spacehabsim
+running install
+running install_lib
+copying /home/tammer/pyrobosim_ws/src/spacehabsim/build/spacehabsim/build/lib/spacehabsim/spacehab.py -> /home/tammer/pyrobosim_ws/src/spacehabsim/install/spacehabsim/lib/python3.10/site-packages/spacehabsim
+byte-compiling /home/tammer/pyrobosim_ws/src/spacehabsim/install/spacehabsim/lib/python3.10/site-packages/spacehabsim/spacehab.py to spacehab.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/tammer/pyrobosim_ws/src/spacehabsim/install/spacehabsim/lib/python3.10/site-packages/spacehabsim-0.0.0-py3.10.egg-info' (and everything under it)
+Copying build/spacehabsim/spacehabsim.egg-info to /home/tammer/pyrobosim_ws/src/spacehabsim/install/spacehabsim/lib/python3.10/site-packages/spacehabsim-0.0.0-py3.10.egg-info
+running install_scripts
+Installing spacedemo script to /home/tammer/pyrobosim_ws/src/spacehabsim/install/spacehabsim/lib/spacehabsim
+writing list of installed files to '/home/tammer/pyrobosim_ws/src/spacehabsim/build/spacehabsim/install.log'
