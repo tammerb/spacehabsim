@@ -11,7 +11,7 @@ import numpy as np
 
 from pyrobosim.core import Robot, World, WorldYamlLoader
 #from pyrobosim.gui import start_gui
-from spacehabsim.gui.space_gui import start_gui
+from spacehabsim.gui.main import start_gui
 from pyrobosim.navigation import ConstantVelocityExecutor, PathPlanner
 # from pyrobosim.utils.general import get_data_folder
 from pyrobosim.utils.pose import Pose
@@ -57,29 +57,25 @@ def create_world():
     )
 
     # Add rooms
-    r1coords = [(-3.0, 0.5),
-                (-2.5, 1.0),
-                (-1.5, 1.0),
-                (-1.0, 0.5),
-                (-1.0, -0.5),
-                (-1.5, -1.0),
-                (-2.5, -1.0),
-                (-3.0, -0.5)]
-    world.add_room(name="module_5", footprint=r1coords, color=[1, 0, 0])
-    r2coords = [(3.0, 0.5),
-                (2.5, 1.0),
-                (1.5, 1.0),
-                (1.0, 0.5),
-                (1.0, -0.5),
-                (1.5, -1.0),
-                (2.5, -1.0),
-                (3.0, -0.5)]
-    world.add_room(name="module_2", footprint=r2coords, color=[0, 0.6, 0])
+    r1coords = [(-3.0, -1.0),
+                (-3.0, 1.0),
+                (3.0, 1.0),
+                (3.0, -1.0)]
+    world.add_room(name="module", footprint=r1coords, color=[0, 0, 0])
+    #r2coords = [(3.0, 0.5),
+    #            (2.5, 1.0),
+    #            (1.5, 1.0),
+    #            (1.0, 0.5),
+    #            (1.0, -0.5),
+    #            (1.5, -1.0),
+    #            (2.5, -1.0),
+    #            (3.0, -0.5)]
+    #world.add_room(name="module_2", footprint=r2coords, color=[0, 0.6, 0])
     #r3coords = [(-1, 1), (-1, 3.5), (-3.0, 3.5), (-2.5, 1)]
     #world.add_room(name="bathroom", footprint=r3coords, color=[0, 0, 0.6])
 
     # Add hallways between the rooms
-    world.add_hallway(room_start="module_5", room_end="module_2", width=0.7)
+    #world.add_hallway(room_start="module_5", room_end="module_2", width=0.7)
     #world.add_hallway(
     #    room_start="bathroom",
     #    room_end="bedroom",
@@ -97,11 +93,14 @@ def create_world():
     #)
 
     # Add locations
-    rack1 = world.add_location(
-       category="rack", parent="module_5", pose=Pose(x=-2.75, y=0, yaw=0.0)
+    oven = world.add_location(
+       category="oven", parent="module", pose=Pose(x=-2, y=0.74, yaw=1.57)
     )
-    rack2 = world.add_location(
-       category="rack", parent="module_2", pose=Pose(x=2, y=0.74, yaw=1.57)
+    printer = world.add_location(
+       category="printer", parent="module", pose=Pose(x=0, y=0.74, yaw=1.57)
+    )
+    eclss = world.add_location(
+       category="eclss", parent="module", pose=Pose(x=2, y=0.74, yaw=1.57)
     )
     #desk = world.add_location(
     #    category="desk", parent="bedroom", pose=Pose(x=3.15, y=3.65, yaw=0.0)
@@ -114,10 +113,13 @@ def create_world():
 
     ## Add objects
     world.add_object(
-        category="wrench", parent=rack1, pose=Pose(x=-2.75, y=0.05, yaw=np.pi / 4.0)
+        category="bracket", parent=printer, pose=Pose(x=0, y=0.74, yaw=np.pi / 4.0)
     )
     world.add_object(
-        category="tape", parent=rack2, pose=Pose(x=2, y=0.74, yaw=np.pi / 4.0)
+        category="sorbent", parent=eclss, pose=Pose(x=2.1, y=0.74, yaw=np.pi / 4.0)
+    )
+    world.add_object(
+        category="sorbent", parent=eclss, pose=Pose(x=1.9, y=0.74, yaw=np.pi / 4.0)
     )
     #world.add_object(category="apple", parent=desk, pose=Pose(x=3.2, y=3.5, yaw=0.0))
     #world.add_object(category="apple", parent=table)
@@ -145,7 +147,7 @@ def create_world():
         path_executor=ConstantVelocityExecutor(),
         path_planner=path_planner,
     )
-    world.add_robot(robot, loc="module_5")
+    world.add_robot(robot, loc="module")
 
     return world
 

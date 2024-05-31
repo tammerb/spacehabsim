@@ -10,6 +10,9 @@ from PySide6.QtCore import QTimer
 from matplotlib.backends.qt_compat import QtCore
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT
 
+#from pyrobosim.gui import WorldCanvas
+from .world_canvas import SpaceWorldCanvas
+
 def start_gui(world):
     """
     Helper function to start a pyrobosim GUI for a world model.
@@ -41,9 +44,21 @@ class SpaceHabSimMainWindow(PyRoboSimMainWindow):
     """Main window for the Space Habitat Simulator"""
 
     def __init__(self, world, show=True, *args, **kwargs):
-        super(SpaceHabSimMainWindow, self).__init__(world, show=show, *args, **kwargs)
+        super(PyRoboSimMainWindow, self).__init__(*args, **kwargs)
 
+        self.setWindowTitle("pyrobosim")
+        self.set_window_dims()
+
+        # Connect the GUI to the world
+        self.world = world
+        self.world.gui = self
+        self.world.has_gui = True
+
+        self.layout_created = False
+        self.canvas = SpaceWorldCanvas(self, world, show)
         self.create_layout()
+        self.canvas.show()
+
 
 
     def create_layout(self):
@@ -107,3 +122,8 @@ class SpaceHabSimMainWindow(PyRoboSimMainWindow):
         self.main_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.main_widget)
         self.layout_created = True
+
+    def closeEvent(self, _):
+        """Cleans up running threads on closing the window."""
+        self.canvas.nav_animator.stop()
+        self.canvas.nav_animator.wait()
