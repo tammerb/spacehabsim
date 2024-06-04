@@ -79,26 +79,33 @@ def create_world():
     """
 
     # Add locations
-    oven = world.add_location(
-       category="oven", parent="module", pose=Pose(x=-2, y=0.74, yaw=1.57)
+    rack_a = world.add_location(
+       name="rack_a", category="storage_rack", parent="module", pose=Pose(x=0, y=0.675, yaw=0)
     )
-    printer = world.add_location(
-       category="printer", parent="module", pose=Pose(x=0, y=0.74, yaw=1.57)
+    rack_b = world.add_location(
+       name="rack_b", category="storage_rack", parent="module", pose=Pose(x=-2.65, y=0, yaw=1.57)
     )
-    eclss = world.add_location(
-       category="eclss", parent="module", pose=Pose(x=2, y=0.74, yaw=1.57)
-    )
+    # printer = world.add_location(
+    #    category="printer", parent="module", pose=Pose(x=0, y=0.74, yaw=1.57)
+    # )
+    # eclss = world.add_location(
+    #    category="eclss", parent="module", pose=Pose(x=2, y=0.74, yaw=1.57)
+    # )
 
     ## Add objects
     world.add_object(
-        category="bracket", parent=printer, pose=Pose(x=0, y=0.74, yaw=np.pi / 4.0)
+        name="box_1", category="bracket", parent=rack_b
     )
     world.add_object(
-        category="sorbent", parent=eclss, pose=Pose(x=2.1, y=0.74, yaw=np.pi / 4.0)
+        name="box_2", category="bracket", parent=rack_b
     )
     world.add_object(
-        category="sorbent", parent=eclss, pose=Pose(x=1.9, y=0.74, yaw=np.pi / 4.0)
+        name="box_3", category="bracket", parent=rack_b
     )
+    world.add_object(
+        name="box_4", category="bracket", parent=rack_b
+    )
+
 
     # Add a robot
     robot = Robot(
