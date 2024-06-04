@@ -16,6 +16,8 @@ from pyrobosim.navigation import ConstantVelocityExecutor, PathPlanner
 # from pyrobosim.utils.general import get_data_folder
 from pyrobosim.utils.pose import Pose
 from pyrobosim_ros.ros_interface import WorldROSWrapper
+from pyrobosim.navigation import OccupancyGrid
+
 
 def get_data_folder(): # TODO: Move this into a utils folder
     """
@@ -130,24 +132,37 @@ def create_world():
 
     # Add a robot
     # Create path planner
-    planner_config = {
-        "world": world,
-        "bidirectional": True,
-        "rrt_connect": False,
-        "rrt_star": True,
-        "collision_check_step_dist": 0.025,
-        "max_connection_dist": 0.5,
-        "rewire_radius": 1.5,
-        "compress_path": False,
-    }
-    path_planner = PathPlanner("rrt", **planner_config)
+    # planner_config = {
+    #     "world": world,
+    #     "bidirectional": True,
+    #     "rrt_connect": False,
+    #     "rrt_star": True,
+    #     "collision_check_step_dist": 0.025,
+    #     "max_connection_dist": 0.5,
+    #     "rewire_radius": 1.5,
+    #     "compress_path": False,
+    # }
+    # path_planner = PathPlanner("rrt", **planner_config)
+
     robot = Robot(
         name="robot",
         radius=0.1,
         path_executor=ConstantVelocityExecutor(),
-        path_planner=path_planner,
     )
     world.add_robot(robot, loc="module")
+
+    planner_config = {
+        "grid": OccupancyGrid.from_world(
+            world, resolution=0.05, inflation_radius=1.5 * robot.radius
+        ),
+        "diagonal_motion": True,
+        "heuristic": "euclidean",
+        "compress_path": False,
+    }
+
+    path_planner = PathPlanner("astar", **planner_config)
+    robot.set_path_planner(path_planner)
+
 
     return world
 
