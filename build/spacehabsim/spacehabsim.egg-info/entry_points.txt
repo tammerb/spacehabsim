@@ -1,3 +1,0 @@
-[console_scripts]
-spacedemo = spacehabsim.spacehab:main
-
